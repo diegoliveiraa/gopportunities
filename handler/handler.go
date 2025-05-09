@@ -1,25 +1,16 @@
 package handler
 
 import (
-	usecases "github.com/diegoliveiraa/gopportunities/use-cases"
-	"github.com/gin-gonic/gin"
+	"github.com/diegoliveiraa/gopportunities/config"
+	"gorm.io/gorm"
 )
 
-func CreateopeningHandler(ctx *gin.Context) {
-	usecases.CreateOpening(ctx)
-}
+var (
+	logger *config.Logger
+	db     *gorm.DB
+)
 
-func UpdateopeningHandler(ctx *gin.Context) {
-	usecases.UpdateOpening(ctx)
-}
-
-func DeleteopeningHandler(ctx *gin.Context) {
-	usecases.DeleteOpening(ctx)
-}
-func ShowopeningHandler(ctx *gin.Context) {
-	usecases.ShowOpening(ctx)
-}
-
-func ShowallopeningHandler(ctx *gin.Context) {
-	usecases.ShowOpening(ctx)
+func InitializeHandler() {
+	logger = config.GetLogger("handler")
+	db = config.GetSQLite()
 }
