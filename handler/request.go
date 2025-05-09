@@ -43,3 +43,21 @@ func (r *CreateOpeningRequest) Validate() error {
 	}
 	return nil
 }
+
+type UpdateOpeningRequest struct {
+	Role     string `json:"role" binding:"required"`
+	Company  string `json:"company" binding:"required"`
+	Location string `json:"location" binding:"required"`
+	Remote   *bool  `json:"remote" binding:"required"`
+	Link     string `json:"link" binding:"required"`
+	Salary   int64  `json:"salary" binding:"required"`
+}
+
+func (r *UpdateOpeningRequest) Validate() error {
+	// if any field is provided, validation is true
+	if r.Role != "" && r.Company != "" && r.Location != "" && r.Remote != nil && r.Link != "" && r.Salary > 0 {
+		return nil
+	}
+	//if none of the fields are provided, validation is false
+	return fmt.Errorf("at least one of the params is required")
+}
