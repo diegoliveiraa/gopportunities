@@ -7,6 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary List all opening
+// @Description List all openings
+// @Tags Openings
+// @Accept json
+// @Produce json
+// @Success 200 {object} ListOpeningsResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /openings [get]
 func ListOpenings(ctx *gin.Context) {
 	openings := []schemas.Opening{}
 	if err := db.Find(&openings).Error; err != nil {
